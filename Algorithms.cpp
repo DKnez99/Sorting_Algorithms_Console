@@ -43,30 +43,49 @@ void initVector(std::vector<int> *v, int size) {
 		std::cout << elem;
 	}
 }
-//===========SELECTION===========
 
-void selectionPrint(std::vector<int> v, int min_id, int i, int j, int cnt, int speed, bool last) {
+void userInputPrint(std::string name, int n, int speed) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(0 + (5 - speed) * 50));
 	system("cls");
 	gotoXY(1, 1);
 	color(7);		//white
-	std::cout << "SELECTION SORT";
+	std::cout << name;
 	gotoXY(1, 3);
-	std::cout << "Number of elements in an array [3-20]: "<<v.size();
+	std::cout << "Number of elements in an array [3-20]: " << n;
 	gotoXY(1, 4);
 	std::cout << "Sorting speed [1-5]: " << speed;
 	gotoXY(1, 5);
-	color(7);
+	color(7);	//white
 	std::cout << "Unsorted   ";
-	color(10);
+	color(10);	//green
 	std::cout << "Sorted   ";
-	color(14);
+}
+
+void arrayPrint(int number, int k) {
+	gotoXY(1, k + 7);
+	for (int m = 0; m < number; m++) {
+		std::cout << outputChar;
+	}
+	gotoXY(60, k + 7);
+	std::cout << number;
+}
+
+void elementsCheckedPrint(int vectorSize, int cnt) {
+	gotoXY(1, vectorSize + 8);
+	color(7);		//white
+	std::cout << "Elements checked: " << cnt;
+}
+
+//===========SELECTION SORT===========
+
+void selectionPrint(std::vector<int> v, int min_id, int i, int j, int cnt, int speed, bool last) {
+	userInputPrint("SELECTION SORT", v.size(), speed);
+	color(14);	//yellow
 	std::cout << "Current element   ";
-	color(13);
+	color(13);	//purple
 	std::cout << "Smallest number in this iteration";
 	for (int k = 0; k < v.size(); k++) {
 		color(7);					//white
-		gotoXY(1, k + 7);
 		if (k < i)					//already sorted
 			color(10);				//green
 		if (k == min_id)			//smallest number in current iteration
@@ -75,15 +94,9 @@ void selectionPrint(std::vector<int> v, int min_id, int i, int j, int cnt, int s
 			color(14);				//yellow
 		if (k == i && last == true)	//if at the end of an iteration and you need to swap with min id
 			color(13);				//purple
-		for (int m = 0; m < v[k]; m++) {
-			std::cout << outputChar;
-		}
-		gotoXY(60, k + 7);
-		std::cout << v[k];
+		arrayPrint(v[k], k);
 	}
-	gotoXY(1, v.size() + 8);
-	color(7);		//white
-	std::cout << "Elements checked: " << cnt;
+	elementsCheckedPrint(v.size(), cnt);
 }
 
 void selectionSort() {
@@ -161,20 +174,7 @@ void bubbleSort() {
 }
 
 void bubblePrint(std::vector<int> v, int i, int j, int cnt, int speed, bool same) {	//why doesnt this work on fully sorted vector (i=vect.size())? it prints out white instead of green
-	std::this_thread::sleep_for(std::chrono::milliseconds(0 + (5 - speed) * 50));
-	system("cls");
-	gotoXY(1, 1);
-	color(7);		//white
-	std::cout << "BUBBLE SORT";
-	gotoXY(1, 3);
-	std::cout << "Number of elements in an array [3-20]: " << v.size();
-	gotoXY(1, 4);
-	std::cout << "Sorting speed [1-5]: " << speed;
-	gotoXY(1, 5);
-	color(7);
-	std::cout << "Unsorted   ";
-	color(10);
-	std::cout << "Sorted   ";
+	userInputPrint("BUBBLE SORT", v.size(), speed);
 	color(14);
 	std::cout << "Comparing elements   ";
 	color(13);
@@ -182,7 +182,6 @@ void bubblePrint(std::vector<int> v, int i, int j, int cnt, int speed, bool same
 
 	for (int k = 0; k < v.size(); k++) {
 		color(7);						//white
-		gotoXY(1, k + 7);
 		if (k > v.size() - i - 1)		//already sorted
 			color(10);					//green
 		if (k == j || k == j + 1) {		//current and next element
@@ -192,31 +191,13 @@ void bubblePrint(std::vector<int> v, int i, int j, int cnt, int speed, bool same
 				color(14);				//yellow
 			}
 		}
-		for (int m = 0; m < v[k]; m++) {
-			std::cout << outputChar;
-		}
-		gotoXY(60, k + 7);
-		std::cout << v[k];
+		arrayPrint(v[k], k);
 	}
-	gotoXY(1, v.size() + 8);
-	color(7);		//white
-	std::cout << "Elements checked: " << cnt;
+	elementsCheckedPrint(v.size(), cnt);
 }
 
 void bubblePrintDone(std::vector<int> v, int cnt, int speed) {
-	system("cls");
-	gotoXY(1, 1);
-	color(7);		//white
-	std::cout << "BUBBLE SORT";
-	gotoXY(1, 3);
-	std::cout << "Number of elements in an array [3-20]: " << v.size();
-	gotoXY(1, 4);
-	std::cout << "Sorting speed [1-5]: " << speed;
-	gotoXY(1, 5);
-	color(7);
-	std::cout << "Unsorted   ";
-	color(10);
-	std::cout << "Sorted   ";
+	userInputPrint("BUBBLE SORT", v.size(), speed);
 	color(14);
 	std::cout << "Comparing elements   ";
 	color(13);
@@ -224,16 +205,9 @@ void bubblePrintDone(std::vector<int> v, int cnt, int speed) {
 
 	for (int k = 0; k < v.size(); k++) {
 		color(10);						//green
-		gotoXY(1, k + 7);
-		for (int m = 0; m < v[k]; m++) {
-			std::cout << outputChar;
-		}
-		gotoXY(60, k + 7);
-		std::cout << v[k];
+		arrayPrint(v[k], k);
 	}
-	gotoXY(1, v.size() + 8);
-	color(7);		//white
-	std::cout << "Elements checked: " << cnt;
+	elementsCheckedPrint(v.size(), cnt);
 }
 
 //===========INSERTION===========
@@ -278,20 +252,7 @@ void insertionSort() {
 }
 
 void insertionPrint(std::vector<int> v, int i, int j, int cnt, int speed, bool greater) {
-	std::this_thread::sleep_for(std::chrono::milliseconds(0 + (5 - speed) * 50));
-	system("cls");
-	gotoXY(1, 1);
-	color(7);		//white
-	std::cout << "INSERTION SORT";
-	gotoXY(1, 3);
-	std::cout << "Number of elements in an array [3-20]: " << v.size();
-	gotoXY(1, 4);
-	std::cout << "Sorting speed [1-5]: " << speed;
-	gotoXY(1, 5);
-	color(7);
-	std::cout << "Unsorted   ";
-	color(10);
-	std::cout << "Sorted   ";
+	userInputPrint("INSERTION SORT", v.size(), speed);
 	color(11);
 	std::cout << "Comparing with   ";
 	color(14);
@@ -300,7 +261,6 @@ void insertionPrint(std::vector<int> v, int i, int j, int cnt, int speed, bool g
 	std::cout << "Current element";
 	for (int k = 0; k < v.size(); k++) {
 		color(7);					//white
-		gotoXY(1, k + 7);
 		if (k > j+1 && k <= i && i!=v.size()-1 && greater==true)	//elements greater than val that are moved forward
 			color(14);				//yellow
 		if (k == j+1)				//val
@@ -309,15 +269,9 @@ void insertionPrint(std::vector<int> v, int i, int j, int cnt, int speed, bool g
 			color(11);				//cyan
 		if (i == v.size() - 1 && (k > j+1))			//already sorted
 			color(10);				//green
-		for (int m = 0; m < v[k]; m++) {
-			std::cout << outputChar;
-		}
-		gotoXY(60, k + 7);
-		std::cout << v[k];
+		arrayPrint(v[k], k);
 	}
-	gotoXY(1, v.size() + 8);
-	color(7);		//white
-	std::cout << "Elements checked: " << cnt;
+	elementsCheckedPrint(v.size(), cnt);
 }
 
 //===========MERGE===========				//find better solution
@@ -333,13 +287,13 @@ void merge(std::vector<int> *v, int left, int mid, int right, int n, int* cnt, i
 	for (int i = 0; i < subVectOne; i++) {
 		leftVect.push_back((*v)[left + i]);
 		(*cnt)++;
-		printM(*v, left + i, -1, -1, -1, n, *cnt, speed, false);
+		printM(*v, left + i, -1, -1, -1, *cnt, speed, false);
 	}
 	for (int j = 0; j < subVectTwo; j++) {
 		if (v->size() != mid + 1 + j) {					//doesnt work without this
 			rightVect.push_back((*v)[mid + 1 + j]);
 			(*cnt)++;
-			printM(*v, -1, mid + 1 + j, -1, -1, n, *cnt, speed, false);
+			printM(*v, -1, mid + 1 + j, -1, -1, *cnt, speed, false);
 		}
 		else {											//and this
 			subVectTwo--;
@@ -352,15 +306,15 @@ void merge(std::vector<int> *v, int left, int mid, int right, int n, int* cnt, i
 
 	//merge temp vectors back into sorted vector[left..right]
 	while (indexOne < subVectOne && indexTwo < subVectTwo) {
-		printM(*v, -1, -1, left+indexOne, mid + 1 + indexTwo, n, *cnt, speed, false);
+		printM(*v, -1, -1, left+indexOne, mid + 1 + indexTwo, *cnt, speed, false);
 		if (leftVect[indexOne] <= rightVect[indexTwo]) {
-			printM(*v, -1, -1, left + indexOne, -1, n, *cnt, speed, true);
+			printM(*v, -1, -1, left + indexOne, -1, *cnt, speed, true);
 			(*v)[indexMerged++] = leftVect[indexOne++];
 			(*cnt)++;
 			//print
 		}
 		else {
-			printM(*v, -1, -1, -1, mid + 1 + indexTwo, n, *cnt, speed, true);
+			printM(*v, -1, -1, -1, mid + 1 + indexTwo, *cnt, speed, true);
 			(*v)[indexMerged++] = rightVect[indexTwo++];
 			(*cnt)++;
 			//print
@@ -369,14 +323,14 @@ void merge(std::vector<int> *v, int left, int mid, int right, int n, int* cnt, i
 
 	//if there are any remaining left elements copy them in merged
 	while (indexOne < subVectOne) {
-		printM(*v, -1, -1, left + indexOne, -1, n, *cnt, speed, true);
+		printM(*v, -1, -1, left + indexOne, -1, *cnt, speed, true);
 		(*v)[indexMerged++] = leftVect[indexOne++];
 		(*cnt)++;
 	}
 
 	//if there are any remaining right elements copy them in merged
 	while (indexTwo < subVectTwo) {
-		printM(*v, -1, -1, -1, mid + 1 + indexTwo, n, *cnt, speed, true);
+		printM(*v, -1, -1, -1, mid + 1 + indexTwo, *cnt, speed, true);
 		(*v)[indexMerged++] = rightVect[indexTwo++];
 		(*cnt)++;
 	}
@@ -389,7 +343,7 @@ void mergeSortAlg(std::vector<int> *v, int begin, int end, int n, int* cnt, int 
 	mergeSortAlg(v, begin, mid, n, cnt, speed);
 	mergeSortAlg(v, mid + 1, end, n, cnt, speed);
 	merge(v, begin, mid, end, n, cnt, speed);
-	printM(*v, -1, -1, -1, -1, n, *cnt, speed, false);
+	printM(*v, -1, -1, -1, -1, *cnt, speed, false);
 }
 
 void mergeSort() {		//function that is called in main and which calls mergeSortAlg
@@ -409,27 +363,14 @@ void mergeSort() {		//function that is called in main and which calls mergeSortA
 	int cnt = 0;
 
 	mergeSortAlg(&vect, 0, vect.size(), n, &cnt, speed);
-	mergePrintDone(vect, n, cnt, speed);
+	mergePrintDone(vect, cnt, speed);
 
 	gotoXY(1, n + 10);
 	std::cout << "Press any key to go back to menu...";
 }
 
-void printM(std::vector<int> v, int i11, int i12, int i21, int i22, int n, int cnt, int speed, bool inserting) {
-	std::this_thread::sleep_for(std::chrono::milliseconds(0 + (5 - speed) * 50));
-	system("cls");
-	gotoXY(1, 1);
-	color(7);		//white
-	std::cout << "MERGE SORT";
-	gotoXY(1, 3);
-	std::cout << "Number of elements in an array [3-20]: " << n;
-	gotoXY(1, 4);
-	std::cout << "Sorting speed [1-5]: " << speed;
-	gotoXY(1, 5);
-	color(7);
-	std::cout << "Unsorted   ";
-	color(10);
-	std::cout << "Sorted   ";
+void printM(std::vector<int> v, int i11, int i12, int i21, int i22, int cnt, int speed, bool inserting) {
+	userInputPrint("MERGE SORT", v.size(), speed);
 	color(11);
 	std::cout << "Inserting into temp vectors   ";
 	color(14);
@@ -447,34 +388,13 @@ void printM(std::vector<int> v, int i11, int i12, int i21, int i22, int n, int c
 			else                    //comparing elements in left and right temp vectors
 				color(14);			//yellow
 		}
-		gotoXY(1, k + 7);
-		for (int m = 0; m < v[k]; m++) {
-			std::cout << outputChar;
-		}
-		gotoXY(60, k + 7);
-		std::cout << v[k];
+		arrayPrint(v[k], k);
 	}
-
-	gotoXY(1, n + 8);
-	color(7);		//white
-	std::cout << "Elements checked: " << cnt;
+	elementsCheckedPrint(v.size(), cnt);
 }
 
-void mergePrintDone(std::vector<int> v, int n, int cnt, int speed) {
-	std::this_thread::sleep_for(std::chrono::milliseconds(0 + (5 - speed) * 50));
-	system("cls");
-	gotoXY(1, 1);
-	color(7);		//white
-	std::cout << "MERGE SORT";
-	gotoXY(1, 3);
-	std::cout << "Number of elements in an array [3-20]: " << n;
-	gotoXY(1, 4);
-	std::cout << "Sorting speed [1-5]: " << speed;
-	gotoXY(1, 5);
-	color(7);
-	std::cout << "Unsorted   ";
-	color(10);
-	std::cout << "Sorted   ";
+void mergePrintDone(std::vector<int> v, int cnt, int speed) {
+	userInputPrint("MERGE SORT", v.size(), speed);
 	color(11);
 	std::cout << "Inserting into temp vectors   ";
 	color(14);
@@ -484,17 +404,9 @@ void mergePrintDone(std::vector<int> v, int n, int cnt, int speed) {
 
 	for (int k = 0; k < v.size(); k++) {
 		color(10);					//green
-		gotoXY(1, k + 7);
-		for (int m = 0; m < v[k]; m++) {
-			std::cout << outputChar;
-		}
-		gotoXY(60, k + 7);
-		std::cout << v[k];
+		arrayPrint(v[k], k);
 	}
-
-	gotoXY(1, n + 8);
-	color(7);		//white
-	std::cout << "Elements checked: " << cnt;
+	elementsCheckedPrint(v.size(), cnt);
 }
 
 //===========QUICK===========				//find better solution
@@ -571,19 +483,7 @@ void quickSort() {		//function that is called in main and which calls quickSortA
 }
 
 void quickPrint(std::vector<int> *v, std::vector<int>* sortedElems, int i, int j, int end, int cnt, int speed, bool swapJ, bool swapEnd) {
-	std::this_thread::sleep_for(std::chrono::milliseconds(0 + (5 - speed) * 50));
-	system("cls");
-	gotoXY(1, 1);
-	color(7);		//white
-	std::cout << "QUICK SORT";
-	gotoXY(1, 3);
-	std::cout << "Number of elements in an array [3-20]: " << (*v).size();
-	gotoXY(1, 4);
-	std::cout << "Sorting speed [1-5]: " << speed;
-	gotoXY(1, 5);
-	std::cout << "Unsorted   ";
-	color(10);		//green
-	std::cout << "Sorted   ";
+	userInputPrint("QUICK SORT", (*v).size(), speed);
 	color(12);		//red
 	std::cout << "Pivot   ";
 	color(14);		//yellow
@@ -612,34 +512,13 @@ void quickPrint(std::vector<int> *v, std::vector<int>* sortedElems, int i, int j
 				break;
 			}
 		}
-		gotoXY(1, k + 7);
-		for (int m = 0; m < (*v)[k]; m++) {
-			std::cout << outputChar;
-		}
-		gotoXY(60, k + 7);
-		std::cout << (*v)[k];
+		arrayPrint((*v)[k], k);
 	}
-
-	gotoXY(1, (*v).size() + 8);
-	color(7);		//white
-	std::cout << "Elements checked: " << cnt;
+	elementsCheckedPrint((*v).size(), cnt);
 }
 
 void quickPrintDone(std::vector<int> v, int cnt, int speed) {
-	std::this_thread::sleep_for(std::chrono::milliseconds(0 + (5 - speed) * 50));
-	system("cls");
-	gotoXY(1, 1);
-	color(7);		//white
-	std::cout << "QUICK SORT";
-	gotoXY(1, 3);
-	std::cout << "Number of elements in an array [3-20]: " << v.size();
-	gotoXY(1, 4);
-	std::cout << "Sorting speed [1-5]: " << speed;
-	gotoXY(1, 5);
-	color(7);
-	std::cout << "Unsorted   ";
-	color(10);
-	std::cout << "Sorted   ";
+	userInputPrint("QUICK SORT", v.size(), speed);
 	color(12);
 	std::cout << "Pivot   ";
 	color(14);
@@ -651,15 +530,7 @@ void quickPrintDone(std::vector<int> v, int cnt, int speed) {
 
 	for (int k = 0; k < v.size(); k++) {
 		color(10);					//green
-		gotoXY(1, k + 7);
-		for (int m = 0; m < v[k]; m++) {
-			std::cout << outputChar;
-		}
-		gotoXY(60, k + 7);
-		std::cout << v[k];
+		arrayPrint(v[k], k);
 	}
-
-	gotoXY(1, v.size() + 8);
-	color(7);		//white
-	std::cout << "Elements checked: " << cnt;
+	elementsCheckedPrint(v.size(), cnt);
 }

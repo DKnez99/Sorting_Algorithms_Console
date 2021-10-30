@@ -1,8 +1,8 @@
 #include "Menu.h"
 
 int menu() {
-	int defaultColor = 7;
-	int highlightColor = 12;
+	int defaultColor = 7;		//white
+	int highlightColor = 12;	//red
 	int colorSet[] = { highlightColor, defaultColor, defaultColor, defaultColor, defaultColor };
 	int cnt = 0;
 	char key;
@@ -11,7 +11,7 @@ int menu() {
 	color(7);
 	std::cout << "MAIN MENU";
 
-	while (1) {
+	while (true) {
 		gotoXY(1, 3);
 		color(colorSet[0]);
 		std::cout << "Selection sort";
@@ -45,7 +45,7 @@ int menu() {
 				cnt++;
 			break;
 		}
-		case '\r': {
+		case '\r': {	//enter
 			color(defaultColor);
 			system("cls");			//clear console window
 			return cnt;
