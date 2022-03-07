@@ -2,7 +2,6 @@
 #include "HelperFunctions.h"
 #include <iostream>
 #include <conio.h>
-//#include <thread>
 
 SelectionSort::SelectionSort(int _numberOfElements, int _sortingSpeed, int _maxNumberSize)
 	: SortingAlgorithm(_numberOfElements, _sortingSpeed, _maxNumberSize),

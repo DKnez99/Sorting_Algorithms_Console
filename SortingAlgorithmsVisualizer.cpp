@@ -3,6 +3,7 @@
 #include "Menu.h"
 #include "SortingAlgorithm.h"
 #include "SelectionSort.h"
+#include "BubbleSort.h"
 #include "HelperFunctions.h"
 #include <iostream>
 #include <conio.h>
@@ -40,7 +41,8 @@ int main()
                     break;
                 }
                 case 1: {   //BUBBLE SORT
-                    //algorithm = new BubbleSort(numberOfElements, sortingSpeed);
+                    algorithm = new BubbleSort(numberOfElements, sortingSpeed);
+                    algorithm->printAll();
                     break;
                 }
                 default:
